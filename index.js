@@ -29,6 +29,27 @@ async function run() {
     // ------------------------------------------------
     // ------- POST Methods
     // ------------------------------------------------
+    // add a new user
+    app.post('/user', async (req, res) => {
+      const email = req.body.email
+      const user = { email }
+      const isExisting = await userCollection.findOne({ email })
+
+      if (!isExisting) {
+        const result = await userCollection.insertOne(user)
+        res.send(result)
+      }
+
+    })
+
+    // ------------------------------------------------
+    // ------- PUT Methods
+    // ------------------------------------------------
+
+
+    // ------------------------------------------------
+    // ------- DELETE Methods
+    // ------------------------------------------------
 
   } finally {
     // await client.close();
